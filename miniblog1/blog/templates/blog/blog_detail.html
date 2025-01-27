@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>{{ blog.title|capfirst }}</h1>
+
+<p><strong>Author:</strong> <a href="{% url 'blogger_detail' blog.author.pk %}">{{ blog.author|capfirst }}</a></p>
+<p><strong>Post date</strong> {{ blog.post_date }}</p>
+
+<h2>Content:</h2>
+<p>{{ blog.content }}</p>
+
+<h2>Comments</h2>
+{% if blog.comment_set.all %}
+<ul>
+  {% for comment in blog.comment_set.all %}
+  <li>
+    <p><strong>Posted by:</strong> {{ comment.author|capfirst }}</p>
+    <p><strong>Posted on:</strong> {{ comment.post_date }}</p>
+    <p>{{ comment.comment }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>No comments made yet.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+<p><a class="btn btn-info" href="{% url 'add_comment' blog.pk %}">Add a comment</a></p>
+{% else %}
+<p><a class="btn btn-warning" href="{% url 'login' %}">Login to add a comment</a></p>
+{% endif %}
+
+{% endblock %}

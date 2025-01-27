@@ -1,0 +1,24 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}<title>Mini blog - {{ blog|capfirst }}</title>{% endblock title %}
+
+{% block content %}
+<div class="py-5">
+  <h4 class="text-center">Add blog comment</h4>
+  <div class="d-flex justify-content-center pt-2">
+    <div class="card" style="width: 28rem;">
+      <div class="card-body">
+        <p>Post your comment for: <a href="{% url 'blog_detail' blog.pk %}">{{ blog }}</a></p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.comment.id_for_label }}" class="mr-3">Description:</label>
+            {{ form.comment }}
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

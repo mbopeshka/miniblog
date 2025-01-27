@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+  <title>Welcome to Mini Blog</title>
+{% endblock %}
+
+{% block content %}
+<h1>Mini Blog Home</h1>
+
+<p>Welcome to <em>Mini Blog</em>, a simple Django-based blogging platform created as a DIY project.</p>
+
+<h2>Dynamic content</h2>
+
+<p>The blog has the following statistics:</p>
+<ul>
+  <li><strong>Blogs:</strong> {{ num_blogs }}</li>
+  <li><strong>Blog authors:</strong> {{ num_bloggers }}</li>
+  <li><strong>Published today:</strong> {{ num_blogs_today }}</li>
+  <li><strong>Comments:</strong> {{ num_comments }}</li>
+</ul>
+<p>
+  You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{%
+  else %} times{% endif %}.
+</p>
+
+{% endblock %}

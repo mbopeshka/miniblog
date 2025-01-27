@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Blogger: {{ blogger|capfirst }}</h1>
+
+<h2>Bio</h2>
+
+<h2>Blogs by {{ blogger|capfirst }}</h2>
+{% if blogger.blog_set.all %}
+<ul>
+  {% for blog in blogger.blog_set.all %}
+  <li>
+    <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title|capfirst }}</a> - {{ blog.post_date|default_if_none:'' }}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>No blogs found for this blogger.</p>
+{% endif %}
+{% endblock %}
